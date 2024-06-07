@@ -98,5 +98,5 @@ if conn is not None:
 
     #capturar datos del estudiante
 
-    idEstudiante = leer_entero("Ingresa el id del estudiante?\n","Debes ingresar el id del estudiante🤖")
-    select_estudiante(conn,idEstudiante)
+    #idEstudiante = leer_entero("Ingresa el id del estudiante?\n","Debes ingresar el id del estudiante🤖")
+    #select_estudiante(conn,idEstudiante)

@@ -20,7 +20,7 @@ dataframe_g11 = pd.read_sql('SELECT * FROM estudiantes',conexion)
 #print(dataframe_g11)
 
 #1  recorrer el dataframe for y iloc
-'''
+
 for i in range(len(dataframe_g11)):
     #print(dataframe_g11.iloc[i])  #acceder a la fila completa
     #print("__________________________________________")
@@ -44,6 +44,7 @@ print("__________________________________________________")
 print(f"Longitud: {len(df_sinnulos)}")
 print(df_sinnulos)
 
+'''
 promedio_edad_por_genero = df_sinnulos.groupby('genero')['edad'].mean()
 print("\nPromedio de edad por género:")
 print(promedio_edad_por_genero)
@@ -70,19 +71,28 @@ for row in dataframe_g11.itertuples():
         dataframe_g11.loc[index, 'edad'] = np.random.randint(18,41)
     index +=1
 
+
+update_estudiante(conexion,(18,1))
+update_estudiante(conexion,(30,2))
+update_estudiante(conexion,(35,3))
+update_estudiante(conexion,(40,4))
+update_estudiante(conexion,(50,5))
+'''
+
 #actualizar información de la edad en la base de datos
 for i in range(len(df_sinnulos)):
     #fue necesario realziar una conversion previa porque el tipo de datos no era realmente entero
     codigo = int(df_sinnulos.iloc[i]['id'])
-    edad = df_sinnulos.iloc[i]['edad']
+    edad = int(df_sinnulos.iloc[i]['edad'])
+    #print(f"id {codigo} id tipo {type(codigo)} edad {edad} edad tipo {type(edad)}")
+
     update_estudiante(conexion,(edad,codigo,))
-'''
+
 #trae información sobre registros sin id vacio o nulo
 #dataframe_1 = pd.read_sql('SELECT * FROM estudiantes WHERE edad is null',conexion)
-#print(dataframe_1)
-
 
 # Definir una función que incremente el valor si el índice es par
+'''
 def incrementar_si_par(value, index):
     if index % 2 == 0:  # Verificar si el índice es par
         return np.random.randint(18,41)
@@ -93,3 +103,8 @@ limpiar_pantalla()
 
 dataframe_g11['edad'] = dataframe_g11.apply(lambda row: incrementar_si_par(row['id'], row.name), axis=1)
 print(dataframe_g11)
+'''
+
+estudiantes_con_edad = pd.read_sql('SELECT * FROM estudiantes WHERE edad is not null',conexion)
+
+print(f"\n\n{estudiantes_con_edad}")

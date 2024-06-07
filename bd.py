@@ -82,7 +82,7 @@ def update_estudiante(conn, estudiante):
         WHERE id = ?
         ''', estudiante)
         conn.commit()
-        print("Usuario actualizado exitosamente")
+        print(f"Usuario actualizado exitosamente :{estudiante[1]}")
     except sqlite3.Error as e:
         print(e)
 
